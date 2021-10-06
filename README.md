@@ -1,4 +1,4 @@
-# bills_challenge_yuca
+# payments_challenge_yuca
 
 Yuca challenge
 

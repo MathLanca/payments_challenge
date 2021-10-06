@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.matheus.yuca.bills_challenge_yuca">
+    package="com.matheus.yuca.payments_challenge_yuca">
    <application
-        android:label="bills_challenge_yuca"
+        android:label="payments_challenge_yuca"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
