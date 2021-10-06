@@ -1,4 +1,4 @@
-import 'package:payments_challenge_yuca/feature/data/payment_detail.dto.dart';
+import 'package:payments_challenge_yuca/feature/data/dto/payment_detail.dto.dart';
 
 class Payment {
   String? status;
