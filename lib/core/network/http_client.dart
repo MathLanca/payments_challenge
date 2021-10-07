@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  final JsonDecoder _decoder = const JsonDecoder();
-
   Future get({
     required String url,
     required String path,
@@ -16,7 +14,7 @@ class HttpClient {
         throw Exception("Error from server: $statusCode");
       }
 
-      return _decoder.convert(result);
+      return json.decode(result);
     });
   }
 }

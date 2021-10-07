@@ -7,15 +7,12 @@ import 'package:http/http.dart' as http;
 class PaymentsDataSource {
   HttpClient _httpClient;
 
-  final JsonDecoder _decoder = const JsonDecoder();
-
   PaymentsDataSource(this._httpClient);
 
   final String baseUrl = "private-42e99d-yuca1.apiary-mock.com";
   final String basePath = "/payments";
 
   Future<List<Payment>>? fetchPayments() {
-    List<Payment>? payments;
     http.get(Uri.https(baseUrl, basePath)).then((response) {
       final String result = response.body;
       final int statusCode = response.statusCode;
@@ -23,9 +20,10 @@ class PaymentsDataSource {
       if (statusCode < 200 || statusCode > 400) {
         throw Exception("Error from server: $statusCode");
       }
-      List<Map<String, dynamic>> decoded = _decoder.convert(result);
-
-      return null;
+      List parsedList = json.decode(result);
+      List<Payment> payments =
+          parsedList.map((val) => Payment.fromJson(val)).toList();
+      return payments;
     });
   }
 }

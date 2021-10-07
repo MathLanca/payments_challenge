@@ -2,7 +2,7 @@ import 'package:payments_challenge_yuca/feature/data/dto/payment_detail.dto.dart
 
 class Payment {
   String? status;
-  double? value;
+  int? value;
   String? dueDate;
   String? effectiveDate;
   List<PaymentDetail>? details;

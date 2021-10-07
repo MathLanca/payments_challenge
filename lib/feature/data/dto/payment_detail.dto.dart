@@ -1,6 +1,6 @@
 class PaymentDetail {
   String? description;
-  double? value;
+  int? value;
 
   PaymentDetail({this.description, this.value});
 
