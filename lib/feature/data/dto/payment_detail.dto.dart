@@ -1,10 +1,10 @@
-class PaymentDetail {
+class PaymentDetailDto {
   String? description;
   int? value;
 
-  PaymentDetail({this.description, this.value});
+  PaymentDetailDto({this.description, this.value});
 
-  PaymentDetail.fromJson(Map<String, dynamic> json)
+  PaymentDetailDto.fromJson(Map<String, dynamic> json)
       : description = json["description"],
         value = json["value"];
 

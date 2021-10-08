@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:payments_challenge_yuca/core/network/http_client.dart';
 import 'package:payments_challenge_yuca/feature/data/datasource/payments.datasource.dart';

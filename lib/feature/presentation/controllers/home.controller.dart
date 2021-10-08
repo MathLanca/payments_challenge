@@ -11,12 +11,19 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<Payment>? payments;
 
+  @observable
+  bool? isLoading;
+
   _HomeControllerBase(this._useCase) {
     fetchPayments();
   }
 
   @action
   void fetchPayments() {
-    var x = _useCase.execute();
+    isLoading = true;
+    _useCase.execute()?.then((result) {
+      isLoading = false;
+      payments = result;
+    });
   }
 }
