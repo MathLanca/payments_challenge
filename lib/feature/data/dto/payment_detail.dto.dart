@@ -5,7 +5,7 @@ class PaymentDetailDto {
   PaymentDetailDto({this.description, this.value});
 
   PaymentDetailDto.fromJson(Map<String, dynamic> json)
-      : description = json["description"],
+      : description = json["descripton"],
         value = json["value"];
 
   Map<String, dynamic> toJson() => {

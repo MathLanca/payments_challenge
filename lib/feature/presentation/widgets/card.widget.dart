@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:payments_challenge_yuca/core/utils/date.utils.dart';
 import 'package:payments_challenge_yuca/feature/domain/model/payment.model.dart';
+import 'package:payments_challenge_yuca/feature/domain/model/payment_detail_arguments.dart';
 
 class PaymentCard extends StatelessWidget {
   int? index;
@@ -26,23 +27,19 @@ class PaymentCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.fromLTRB(30, 30, 30, 20),
       child: SizedBox(
-        height: 297,
         child: Column(
           children: [
             // Header
             Container(
               width: double.maxFinite,
-              color: type == PaymentType.opened ? null : mainColor,
               height: 64,
-              decoration: type == PaymentType.opened
-                  ? const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    )
-                  : null,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(4),
+                  topRight: Radius.circular(4),
+                ),
+                color: type == PaymentType.opened ? null : mainColor,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -66,7 +63,7 @@ class PaymentCard extends StatelessWidget {
                 ],
               ),
             ),
-
+            if (type == PaymentType.opened) const Divider(),
             // Content
             Padding(
               padding: const EdgeInsets.only(top: 30),
@@ -117,8 +114,7 @@ class PaymentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildRoundedButton(
-                    mainColor: mainColor!,
-                    text: "Ver detalhes",
+                    text: "VER DETALHES",
                     useMainColorInBackGround: false,
                     context: context,
                   ),
@@ -126,8 +122,7 @@ class PaymentCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: _buildRoundedButton(
-                          mainColor: mainColor!,
-                          text: "Pagar",
+                          text: "PAGAR",
                           useMainColorInBackGround: true,
                           context: context),
                     ),
@@ -141,33 +136,40 @@ class PaymentCard extends StatelessWidget {
   }
 
   Widget _buildRoundedButton(
-      {required Color mainColor,
-      required String text,
+      {required String text,
       required bool useMainColorInBackGround,
       required BuildContext context}) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, "/detail");
-      },
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: 12,
-          fontFamily: "Montserrat",
-          color: useMainColorInBackGround ? Colors.white : mainColor,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, "/detail",
+              arguments: PaymentDetailArguments(
+                mainColor: mainColor,
+                payment: payment,
+                type: type,
+              ));
+        },
+        child: Text(
+          text,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            fontFamily: "Montserrat",
+            color: useMainColorInBackGround ? Colors.white : mainColor,
+          ),
         ),
-      ),
-      style: ButtonStyle(
-        elevation: MaterialStateProperty.all<double>(0.0),
-        backgroundColor: MaterialStateProperty.all<Color>(
-          useMainColorInBackGround ? mainColor : Colors.white,
-        ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(36.0),
-            side: const BorderSide(
-              color: Color.fromRGBO(242, 242, 242, 1),
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double>(0.0),
+          backgroundColor: MaterialStateProperty.all<Color>(
+            useMainColorInBackGround ? mainColor! : Colors.white,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(36.0),
+              side: const BorderSide(
+                color: Color.fromRGBO(242, 242, 242, 1),
+              ),
             ),
           ),
         ),

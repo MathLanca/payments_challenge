@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:payments_challenge_yuca/core/network/http_client.dart';
 import 'package:payments_challenge_yuca/feature/data/datasource/payments.datasource.dart';
+import 'package:payments_challenge_yuca/feature/domain/model/payment_detail_arguments.dart';
 import 'package:payments_challenge_yuca/feature/domain/usecase/fetch_payments.usecase.dart';
 import 'package:payments_challenge_yuca/feature/domain/usecase/fetch_payments.usecase_impl.dart';
 import 'package:payments_challenge_yuca/feature/presentation/controllers/home.controller.dart';
@@ -14,8 +14,7 @@ void main() {
   GetIt getIt = GetIt.I;
 
   getIt.registerFactory<HomeController>(() => HomeController(getIt()));
-  getIt.registerFactory<PaymentsDataSource>(
-      () => PaymentsDataSource(HttpClient()));
+  getIt.registerFactory<PaymentsDataSource>(() => PaymentsDataSource());
   getIt.registerFactory<FetchPaymentsUseCase>(
       () => FetchPaymentsUseCaseImpl(getIt()));
 
@@ -47,7 +46,9 @@ class MyApp extends StatelessWidget {
           case "/detail":
             return PageTransition(
               type: PageTransitionType.bottomToTop,
-              child: const PaymentDetailPage(),
+              child: PaymentDetailPage(
+                arguments: settings.arguments as PaymentDetailArguments,
+              ),
             );
         }
       },
