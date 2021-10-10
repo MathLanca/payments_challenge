@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: "Montserrat",
       ),
       home: const PaymentsHomePage(),
       onGenerateRoute: (settings) {

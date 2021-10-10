@@ -32,7 +32,6 @@ class _PaymentsHomePageState extends State<PaymentsHomePage> {
             child: Text(
               'Pagamentos',
               style: TextStyle(
-                fontFamily: "Montserrat",
                 fontSize: 16,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

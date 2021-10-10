@@ -74,7 +74,6 @@ class PaymentCard extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
-                  fontFamily: "Montserrat",
                 ),
               ),
             ),
@@ -90,7 +89,6 @@ class PaymentCard extends StatelessWidget {
                   color: Color.fromRGBO(125, 125, 125, 1),
                   fontWeight: FontWeight.w400,
                   fontSize: 14,
-                  fontFamily: "Montserrat",
                 ),
               ),
             ),
@@ -103,7 +101,6 @@ class PaymentCard extends StatelessWidget {
                   color: mainColor,
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
-                  fontFamily: "Montserrat",
                 ),
               ),
             ),
@@ -155,7 +152,6 @@ class PaymentCard extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            fontFamily: "Montserrat",
             color: useMainColorInBackGround ? Colors.white : mainColor,
           ),
         ),

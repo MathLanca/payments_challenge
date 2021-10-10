@@ -41,7 +41,6 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
           child: Text(
             'Mensalidades',
             style: TextStyle(
-              fontFamily: "Montserrat",
               fontSize: 16,
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -98,7 +97,6 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
-                  fontFamily: "Montserrat",
                 ),
               ),
             ),
@@ -112,7 +110,6 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
                 color: Color.fromRGBO(125, 125, 125, 1),
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
-                fontFamily: "Montserrat",
               ),
             ),
             Padding(
@@ -124,7 +121,6 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
                   color: mainColor,
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
-                  fontFamily: "Montserrat",
                 ),
               ),
             ),
