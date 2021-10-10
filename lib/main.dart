@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:payments_challenge_yuca/core/network/http_client.dart';
 import 'package:payments_challenge_yuca/feature/data/datasource/payments.datasource.dart';
@@ -18,7 +19,11 @@ void main() {
   getIt.registerFactory<FetchPaymentsUseCase>(
       () => FetchPaymentsUseCaseImpl(getIt()));
 
-  runApp(const MyApp());
+  initializeDateFormatting("pt_BR", null).then(
+    (_) => runApp(
+      const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -41,7 +46,7 @@ class MyApp extends StatelessWidget {
             );
           case "/detail":
             return PageTransition(
-              type: PageTransitionType.leftToRight,
+              type: PageTransitionType.bottomToTop,
               child: const PaymentDetailPage(),
             );
         }

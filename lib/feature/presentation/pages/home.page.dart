@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:payments_challenge_yuca/core/utils/date.utils.dart';
 import 'package:payments_challenge_yuca/feature/domain/model/payment.model.dart';
 import 'package:payments_challenge_yuca/feature/presentation/controllers/home.controller.dart';
+import 'package:payments_challenge_yuca/feature/presentation/widgets/card.widget.dart';
 
 class PaymentsHomePage extends StatefulWidget {
   const PaymentsHomePage({Key? key}) : super(key: key);
@@ -46,7 +49,9 @@ class _PaymentsHomePageState extends State<PaymentsHomePage> {
             if (_controller.isLoading!) {
               return _buildLoader();
             } else {
-              return _buildCards(_controller.payments!, context);
+              return _controller.payments != null
+                  ? _buildList(_controller.payments!, context)
+                  : Container();
             }
           }),
         ),
@@ -54,64 +59,49 @@ class _PaymentsHomePageState extends State<PaymentsHomePage> {
     );
   }
 
-  _buildCards(List<Payment> payments, BuildContext context) {
-    if (payments == null) {
-      return Container();
-    }
-    return Padding(
-      padding: const EdgeInsets.only(top: 30),
-      child: ListView.separated(
-          itemBuilder: (context, index) => Card(
-                margin: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
-                color: Colors.amber,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.only(right: 13),
-                                child: Icon(
-                                  Icons.calendar_today,
-                                  color: Color.fromRGBO(32, 177, 223, 1),
-                                ),
-                              ),
-                              Text(
-                                "Mensalidade Aberta",
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  color: Color.fromRGBO(32, 177, 223, 1),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        width: double.infinity,
-                        height: 64,
-                        color: Colors.white,
-                      ),
-                      Container(
-                        color: Colors.red,
-                        width: double.infinity,
-                        height: 89,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-          separatorBuilder: (context, index) => Container(),
-          itemCount: payments.length),
+  Widget _buildList(List<Payment> payments, BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) =>
+          _getCard(context, index, payments[index]),
+      itemCount: payments.length,
     );
   }
 
-  _buildLoader() {
+  Widget _getCard(BuildContext context, int index, Payment payment) {
+    switch (payment.status) {
+      case "open":
+        return PaymentCard(
+          index: index,
+          type: PaymentType.opened,
+          title: "Mensalidade aberta",
+          mainColor: const Color.fromRGBO(32, 177, 223, 1),
+          icon: Icons.calendar_today_rounded,
+          payment: payment,
+        );
+      case "paid":
+        return PaymentCard(
+          index: index,
+          type: PaymentType.paid,
+          title: "Mensalidade paga!",
+          mainColor: const Color.fromRGBO(19, 192, 129, 1),
+          icon: Icons.check_circle_outline,
+          payment: payment,
+        );
+      case "closed":
+        return PaymentCard(
+          index: index,
+          type: PaymentType.closed,
+          title: "Mensalidade fechada",
+          mainColor: const Color.fromRGBO(120, 100, 200, 1),
+          icon: Icons.notes,
+          payment: payment,
+        );
+      default:
+        return Container();
+    }
+  }
+
+  Widget _buildLoader() {
     return const Center(
       child: CircularProgressIndicator(
         color: Colors.black,

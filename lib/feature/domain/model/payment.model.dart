@@ -30,3 +30,5 @@ class Payment {
         details: dto.details?.map((e) => PaymentDetail.fromDto(e)).toList(),
       );
 }
+
+enum PaymentType { opened, closed, paid }
