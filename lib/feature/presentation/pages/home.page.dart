@@ -75,7 +75,7 @@ class _PaymentsHomePageState extends State<PaymentsHomePage> {
           type: PaymentType.opened,
           title: "Mensalidade aberta",
           mainColor: const Color.fromRGBO(32, 177, 223, 1),
-          icon: Icons.calendar_today_rounded,
+          icon: Icons.date_range,
           payment: payment,
         );
       case "paid":
@@ -93,7 +93,7 @@ class _PaymentsHomePageState extends State<PaymentsHomePage> {
           type: PaymentType.closed,
           title: "Mensalidade fechada",
           mainColor: const Color.fromRGBO(120, 100, 200, 1),
-          icon: Icons.notes,
+          icon: Icons.article_outlined,
           payment: payment,
         );
       default:
