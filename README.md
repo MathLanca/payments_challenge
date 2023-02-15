@@ -1,6 +1,6 @@
-# payments_challenge_yuca
+# payments_challenge
 
-Yuca challenge
+simple payments project
 
 ## Getting Started
 
